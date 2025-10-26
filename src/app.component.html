@@ -1,0 +1,60 @@
+<div class="min-h-screen bg-gray-900 text-gray-200 font-sans p-4 sm:p-6 lg:p-8">
+  <main class="max-w-7xl mx-auto">
+    <!-- Header Section -->
+    <header class="text-center mb-8 md:mb-12">
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white mb-2">
+        گالری عکس من
+      </h1>
+      <p class="text-lg text-gray-400">مجموعه‌ای از عکس‌های درس عکاسی</p>
+    </header>
+
+    <!-- Upload Button Section -->
+    <div class="flex justify-center mb-8 md:mb-12">
+      <input 
+        type="file" 
+        class="hidden" 
+        #fileInput 
+        (change)="onFileSelected($event)" 
+        accept="image/png, image/jpeg, image/gif"
+      >
+      <button 
+        (click)="triggerFileInput(fileInput)"
+        class="flex items-center gap-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+        </svg>
+        <span>آپلود عکس جدید</span>
+      </button>
+    </div>
+
+    <!-- Image Gallery Section -->
+    @if (images().length > 0) {
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+        @for (imageSrc of images(); track imageSrc) {
+          <div class="group relative overflow-hidden rounded-lg shadow-xl aspect-w-1 aspect-h-1">
+            <img 
+              [src]="imageSrc" 
+              alt="عکس گالری" 
+              class="w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
+              loading="lazy"
+            >
+            <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-500"></div>
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="text-center py-16 px-6 border-2 border-dashed border-gray-700 rounded-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" class="mx-auto h-12 w-12 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14" />
+        </svg>
+        <h3 class="mt-4 text-xl font-medium text-gray-300">گالری شما خالی است</h3>
+        <p class="mt-1 text-sm text-gray-500">برای شروع، یک عکس جدید آپلود کنید.</p>
+      </div>
+    }
+  </main>
+  
+  <footer class="text-center mt-12 py-4 border-t border-gray-800">
+    <p class="text-gray-500 text-sm">ساخته شده برای پروژه دانشگاه</p>
+  </footer>
+</div>
